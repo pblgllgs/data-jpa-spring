@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  postgres:
+    container_name: postgres_db_amigoscode
+    image: postgres:14.3
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: amigoscode
+    ports:
+      - "5432:5432"
+    volumes:
+      - data_postgres_db_amigoscode:/var/lib/postgresql/data
+volumes:
+  data_postgres_db_amigoscode:
