@@ -1,6 +1,6 @@
-package com.pblgllgs.datajpa;
+package com.pblgllgs.datajpa.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.pblgllgs.datajpa.entity.Student;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;

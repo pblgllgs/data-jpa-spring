@@ -1,4 +1,7 @@
-package com.pblgllgs.datajpa;
+package com.pblgllgs.datajpa.entity;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.pblgllgs.datajpa.entity.Student;
 
 import javax.persistence.*;
 
@@ -30,14 +33,15 @@ public class StudentIdCad {
     private Long id;
 
     @OneToOne(
-            cascade = CascadeType.ALL,
-            targetEntity = Student.class,
+            cascade = CascadeType.PERSIST,
             fetch = FetchType.EAGER
     )
     @JoinColumn(
             name = "student_id",
-            referencedColumnName = "id"
+            referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "student_id_FK")
     )
+    @JsonIgnore
     private Student student;
 
     @Column(
@@ -75,11 +79,18 @@ public class StudentIdCad {
         this.cardNumber = cardNumber;
     }
 
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
     @Override
     public String toString() {
         return "StudentIdCad{" +
                 "id=" + id +
-                ", student=" + student +
                 ", cardNumber='" + cardNumber + '\'' +
                 '}';
     }

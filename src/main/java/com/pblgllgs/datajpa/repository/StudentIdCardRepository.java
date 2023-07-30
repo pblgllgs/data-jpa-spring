@@ -1,5 +1,6 @@
-package com.pblgllgs.datajpa;
+package com.pblgllgs.datajpa.repository;
 
+import com.pblgllgs.datajpa.entity.StudentIdCad;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

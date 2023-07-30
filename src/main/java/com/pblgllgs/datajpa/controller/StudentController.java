@@ -1,5 +1,7 @@
-package com.pblgllgs.datajpa;
+package com.pblgllgs.datajpa.controller;
 
+import com.pblgllgs.datajpa.entity.Student;
+import com.pblgllgs.datajpa.repository.StudentRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
