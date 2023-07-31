@@ -18,7 +18,7 @@ public class BookController {
         this.bookRepository = bookRepository;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/v1/{id}")
     public ResponseEntity<Book> findById(@PathVariable("id") Long id){
         return new ResponseEntity<>(
                 bookRepository

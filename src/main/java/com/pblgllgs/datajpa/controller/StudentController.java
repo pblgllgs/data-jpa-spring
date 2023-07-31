@@ -17,7 +17,7 @@ public class StudentController {
         this.studentRepository = studentRepository;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/v1/{id}")
     public Student findById(@PathVariable("id") Long id){
         return studentRepository.findById(id).orElseThrow( () -> new RuntimeException("no encontrado"));
     }

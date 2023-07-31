@@ -1,9 +1,7 @@
 package com.pblgllgs.datajpa;
 
 import com.github.javafaker.Faker;
-import com.pblgllgs.datajpa.entity.Book;
-import com.pblgllgs.datajpa.entity.Student;
-import com.pblgllgs.datajpa.entity.StudentIdCad;
+import com.pblgllgs.datajpa.entity.*;
 import com.pblgllgs.datajpa.repository.StudentIdCardRepository;
 import com.pblgllgs.datajpa.repository.StudentRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -12,7 +10,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @SpringBootApplication
@@ -57,14 +54,47 @@ public class DataJpaApplication {
                     "Amazon Web Services",
                     LocalDateTime.now().minusDays(4)
             ));
-            StudentIdCad studentIdCad = new StudentIdCad(student, "1234567890");
-            studentIdCardRepository.save(studentIdCad);
 
-            studentRepository.findById(1L).ifPresent( s ->{
+            StudentIdCad studentIdCad = new StudentIdCad(student, "1234567890");
+
+            student.setStudentIdCad(studentIdCad);
+
+            student.addEnrolment(
+                    new Enrolment(
+                            new EnrolmentId(
+                                    1L,
+                                    1L
+                            ),
+                            student,
+                            new Course(
+                                    "Computer science",
+                                    "IT"
+                            ),
+                            LocalDateTime.now()
+                    )
+            );
+            student.addEnrolment(
+                    new Enrolment(
+                            new EnrolmentId(
+                                    1L,
+                                    2L
+                            ),
+                            student,
+                            new Course(
+                                    "JAVA",
+                                    "IT"
+                            ),
+                            LocalDateTime.now().minusDays(18)
+                    )
+            );
+
+            studentRepository.save(student);
+
+            studentRepository.findById(1L).ifPresent(s -> {
                 System.out.println("fetch books lazy...");
                 List<Book> books = student.getBooks();
-                books.forEach( book-> System.out.println(
-                        s.getFirstName() + " borrowed "+ book.getBookName()));
+                books.forEach(book -> System.out.println(
+                        s.getFirstName() + " borrowed " + book.getBookName()));
             });
         };
     }

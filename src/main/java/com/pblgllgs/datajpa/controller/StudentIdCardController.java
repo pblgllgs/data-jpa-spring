@@ -19,7 +19,7 @@ public class StudentIdCardController {
     }
 
 
-    @GetMapping("/{id}")
+    @GetMapping("/v1/{id}")
     public ResponseEntity<StudentIdCad> findById(@PathVariable("id") Long id){
         return new ResponseEntity<>(
                 studentIdCardRepository

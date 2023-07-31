@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
+@Transactional(readOnly = true)
 public interface StudentRepository  extends PagingAndSortingRepository<Student,Long> {
     Optional<Student> findStudentByEmail(String email);
     List<Student> findStudentsByFirstNameEqualsAndAgeEquals(String firstName, Integer age);
@@ -22,14 +23,12 @@ public interface StudentRepository  extends PagingAndSortingRepository<Student,L
     List<Student> findStudentsByFirstNameEqualsAndAgeEqualsJPQL(String firstName, Integer age);
     @Query("SELECT s FROM Student s WHERE s.lastName=?1 and s.age>?2")
     List<Student> findStudentsByLastNameEqualsAndAgeGreaterThanJPQL(String lastName, Integer age);
-
     @Query(value = "SELECT * FROM Student WHERE last_name=:lastName and age>:age", nativeQuery = true)
     List<Student> findStudentsByLastNameEqualsAndAgeGreaterThanNative(
             @Param("lastName") String lastName,
             @Param("age") Integer age
     );
-
-    @Transactional
+    @Transactional()
     @Modifying
     @Query("DELETE FROM Student s WHERE s.id=?1")
     int deleteStudentBy(Long id);
